@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Radio Lhasa</title>
+  <title>Radio Lhasa · ལྷ་སའི་རླུང་འཕྲིན།</title>
   <meta name="description" content="Radio Lhasa with DJ Tenzin Ali: Tibetan songs and prayers, streaming live around the clock.">
   <meta name="theme-color" content="#0d1424">
-  <meta property="og:title" content="Radio Lhasa">
+  <meta property="og:title" content="Radio Lhasa · ལྷ་སའི་རླུང་འཕྲིན།">
   <meta property="og:description" content="Tibetan songs and prayers with DJ Tenzin Ali, live around the clock.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="images/potala-1000.jpg">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 108 108'%3E%3Ccircle cx='54' cy='54' r='54' fill='%23e81e4d'/%3E%3Ccircle cx='54' cy='54' r='7' fill='white'/%3E%3Cpath d='M44.1 44.1a14 14 0 0 0 0 19.8M63.9 44.1a14 14 0 0 1 0 19.8M37 37a24 24 0 0 0 0 34M71 37a24 24 0 0 1 0 34' fill='none' stroke='white' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600;700&family=Noto+Serif+Tibetan:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #f7f3ee;
@@ -257,6 +257,43 @@
       font-size: 20px;
       font-weight: 700;
     }
+    /* Tibetan: Noto Serif Tibetan, with room for stacked letters */
+    [lang="bo"] {
+      font-family: "Noto Serif Tibetan", "Jomolhari", serif;
+      font-weight: 400;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+    .name-bo {
+      display: block;
+      margin: 14px 0 0;
+      font-size: clamp(24px, 4.4vw, 38px);
+      line-height: 1.5;
+      font-weight: 700;
+      color: rgba(255, 255, 255, .92);
+      text-shadow: 0 2px 20px rgba(0, 0, 0, .4);
+    }
+    .dj-label [lang="bo"], .dj-name [lang="bo"] { display: block; }
+    .dj-label [lang="bo"] {
+      margin-top: 4px;
+      font-size: 13px;
+      line-height: 2;
+      color: rgba(255, 255, 255, .8);
+    }
+    .dj-name { margin-top: 2px; }
+    .dj-name [lang="bo"] {
+      font-size: 17px;
+      line-height: 1.9;
+      font-weight: 700;
+    }
+    .dj:has([lang="bo"]) { border-radius: 26px; padding-top: 10px; padding-bottom: 10px; }
+    .lede-bo {
+      margin: 8px 0 0;
+      max-width: 34em;
+      font-size: clamp(16px, 2.2vw, 19px);
+      line-height: 1.7;
+      color: rgba(255, 255, 255, .82);
+    }
     .lede {
       margin: 18px 0 0;
       max-width: 36ch;
@@ -473,14 +510,16 @@
       <div class="hero-text">
         <p class="eyebrow">Live from the roof of the world</p>
         <h1>Radio Lhasa</h1>
+        <span class="name-bo" lang="bo">ལྷ་སའི་རླུང་འཕྲིན།</span>
         <div class="dj">
           <span class="dj-avatar" aria-hidden="true">TA</span>
           <span class="dj-text">
-            <span class="dj-label">Your DJ</span>
-            <span class="dj-name">Tenzin Ali</span>
+            <span class="dj-label">Your DJ <span lang="bo">ཁྱེད་ཀྱི་རླུང་འཕྲིན་གཙོ་སྐྱོང་པ།</span></span>
+            <span class="dj-name">Tenzin Ali <span lang="bo">བསྟན་འཛིན་ཨ་ལི།</span></span>
           </span>
         </div>
         <p class="lede">Tibetan songs and prayers, streaming live around the clock.</p>
+        <p class="lede-bo" lang="bo">བོད་ཀྱི་གླུ་གཞས་དང་ཞལ་འདོན། ཆུ་ཚོད་ཉེར་བཞིའི་རིང་ཐད་གཏོང་གཏོང་བཞིན་པ</p>
       </div>
 
       <section class="player off" id="player" aria-label="Live radio player">
