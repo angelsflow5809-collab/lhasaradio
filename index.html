@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Radio Lhasa</title>
+  <meta name="description" content="Radio Lhasa with DJ Tenzin Ali: Tibetan songs and prayers, streaming live around the clock.">
+  <meta name="theme-color" content="#0d1424">
+  <meta property="og:title" content="Radio Lhasa">
+  <meta property="og:description" content="Tibetan songs and prayers with DJ Tenzin Ali, live around the clock.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="images/potala-1000.jpg">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 108 108'%3E%3Ccircle cx='54' cy='54' r='54' fill='%23e81e4d'/%3E%3Ccircle cx='54' cy='54' r='7' fill='white'/%3E%3Cpath d='M44.1 44.1a14 14 0 0 0 0 19.8M63.9 44.1a14 14 0 0 1 0 19.8M37 37a24 24 0 0 0 0 34M71 37a24 24 0 0 1 0 34' fill='none' stroke='white' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f7f3ee;
+      --surface: #ffffff;
+      --ink: #191512;
+      --muted: #6b625b;
+      --line: #e8ded3;
+      --accent: #e81e4d;
+      --accent-soft: rgba(232, 30, 77, .12);
+      --shadow: 0 2px 6px rgba(20, 16, 12, .06), 0 24px 60px rgba(20, 16, 12, .14);
+      --flag-blue: #1f5fbf;
+      --flag-white: #f4f1ea;
+      --flag-red: #d4313a;
+      --flag-green: #2f8f4e;
+      --flag-yellow: #f1b829;
+      --hero-ink: #ffffff;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #0e0c0b;
+        --surface: #1a1715;
+        --ink: #f4eee8;
+        --muted: #a89c92;
+        --line: #2e2824;
+        --accent: #ff4d72;
+        --accent-soft: rgba(255, 77, 114, .14);
+        --shadow: 0 2px 6px rgba(0, 0, 0, .4), 0 24px 60px rgba(0, 0, 0, .5);
+      }
+    }
+    :root[data-theme="dark"] {
+      --bg: #0e0c0b;
+      --surface: #1a1715;
+      --ink: #f4eee8;
+      --muted: #a89c92;
+      --line: #2e2824;
+      --accent: #ff4d72;
+      --accent-soft: rgba(255, 77, 114, .14);
+      --shadow: 0 2px 6px rgba(0, 0, 0, .4), 0 24px 60px rgba(0, 0, 0, .5);
+    }
+
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 400 17px/1.6 Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+      overflow-x: hidden;
+    }
+    a { color: var(--accent); }
+    .wrap {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+    @media (min-width: 720px) {
+      .wrap { padding-left: 32px; padding-right: 32px; }
+    }
+
+    /* ---------- Hero: Lhasa photo ---------- */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100svh;
+      color: var(--hero-ink);
+      display: flex;
+      flex-direction: column;
+      isolation: isolate;
+      overflow: hidden;
+      background: #0d1424;
+    }
+    .hero-photo {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 42%;
+      transform: scale(1.04);
+      animation: drift 30s ease-in-out infinite alternate;
+    }
+    @keyframes drift {
+      from { transform: scale(1.04) translate(0, 0); }
+      to { transform: scale(1.1) translate(-1.5%, -1%); }
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(90deg, rgba(8, 10, 16, .78) 0%, rgba(8, 10, 16, .35) 55%, rgba(8, 10, 16, .25) 100%),
+        linear-gradient(180deg, rgba(8, 12, 22, .45) 0%, rgba(8, 12, 22, 0) 25%, rgba(8, 10, 16, .1) 60%, rgba(8, 10, 16, .75) 100%),
+        radial-gradient(120% 70% at 0% 100%, rgba(232, 30, 77, .25), transparent 60%);
+    }
+
+    @media (max-aspect-ratio: 4/5) {
+      .hero::after {
+        background:
+          linear-gradient(180deg, rgba(8, 12, 22, .55) 0%, rgba(8, 10, 16, .55) 30%, rgba(8, 10, 16, .8) 60%, rgba(8, 10, 16, .95) 100%),
+          radial-gradient(120% 70% at 0% 100%, rgba(232, 30, 77, .28), transparent 60%);
+      }
+    }
+
+    .flags {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      height: 5px;
+      position: relative;
+      z-index: 2;
+    }
+    .flags span:nth-child(1) { background: var(--flag-blue); }
+    .flags span:nth-child(2) { background: var(--flag-white); }
+    .flags span:nth-child(3) { background: var(--flag-red); }
+    .flags span:nth-child(4) { background: var(--flag-green); }
+    .flags span:nth-child(5) { background: var(--flag-yellow); }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-top: 20px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      letter-spacing: .01em;
+      color: inherit;
+      text-decoration: none;
+    }
+    .brand svg { width: 34px; height: 34px; flex: none; }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      background: rgba(255, 255, 255, .14);
+      border: 1px solid rgba(255, 255, 255, .22);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      color: #fff;
+      white-space: nowrap;
+    }
+    .pill .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ff3b63;
+      box-shadow: 0 0 0 0 rgba(255, 59, 99, .7);
+      animation: ping 1.8s ease-out infinite;
+    }
+    @keyframes ping {
+      0% { box-shadow: 0 0 0 0 rgba(255, 59, 99, .7); }
+      100% { box-shadow: 0 0 0 10px rgba(255, 59, 99, 0); }
+    }
+
+    .hero-body {
+      margin-top: auto;
+      margin-bottom: auto;
+      padding-top: 40px;
+      padding-bottom: 48px;
+      display: grid;
+      gap: 28px;
+      align-items: center;
+    }
+    @media (min-width: 960px) {
+      .hero-body {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 520px);
+        gap: 56px;
+        padding-bottom: 64px;
+      }
+    }
+    @media (max-width: 959px) {
+      .hero { min-height: 0; }
+      .hero-body { padding-top: 28px; }
+    }
+    .eyebrow {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .78);
+      margin: 0 0 12px;
+    }
+    h1 {
+      font-family: Fraunces, Georgia, serif;
+      font-weight: 800;
+      font-size: clamp(50px, 13vw, 112px);
+      line-height: .92;
+      letter-spacing: -.03em;
+      margin: 0;
+      text-shadow: 0 4px 40px rgba(0, 0, 0, .35);
+    }
+    .dj {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 20px;
+      padding: 8px 20px 8px 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .12);
+      border: 1px solid rgba(255, 255, 255, .2);
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
+    }
+    .dj-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: 17px;
+      letter-spacing: .02em;
+      color: #fff;
+      background: linear-gradient(135deg, #ff4d72, #b3123a);
+      box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .35);
+    }
+    .dj-text { line-height: 1.25; }
+    .dj-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .72);
+    }
+    .dj-name {
+      display: block;
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .lede {
+      margin: 18px 0 0;
+      max-width: 36ch;
+      font-size: clamp(17px, 2.4vw, 20px);
+      color: rgba(255, 255, 255, .86);
+    }
+
+    /* ---------- Player, overlapping the photo ---------- */
+    /* Maroon-to-crimson glass, the colour of monks' robes */
+    .player {
+      position: relative;
+      color: #fff;
+      background:
+        radial-gradient(120% 90% at 100% 0%, rgba(255, 77, 114, .45), transparent 55%),
+        linear-gradient(150deg, rgba(122, 22, 48, .88) 0%, rgba(70, 12, 36, .9) 55%, rgba(28, 8, 24, .92) 100%);
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: 24px;
+      box-shadow: 0 30px 80px rgba(80, 6, 30, .55), inset 0 1px 0 rgba(255, 255, 255, .2);
+      -webkit-backdrop-filter: blur(18px) saturate(140%);
+      backdrop-filter: blur(18px) saturate(140%);
+      padding: 16px;
+    }
+    .player .cstrEmbed iframe {
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .35);
+    }
+    .player-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 2px 4px 12px;
+    }
+    .player-head h2 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: .02em;
+    }
+    .player-head h2::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #ff3b63;
+      animation: ping 1.8s ease-out infinite;
+    }
+    .player-head span {
+      font-size: 13px;
+      color: rgba(255, 255, 255, .7);
+    }
+    .player .cstrEmbed { width: 100%; }
+    .player-fallback { color: rgba(255, 255, 255, .8); font-size: 15px; margin: 0; }
+
+    /* ---------- About ---------- */
+    .about {
+      padding-top: 88px;
+      padding-bottom: 24px;
+      display: grid;
+      gap: 40px;
+    }
+    @media (min-width: 900px) {
+      .about { grid-template-columns: 1fr 1.1fr; align-items: start; }
+    }
+    .about h2 {
+      font-family: Fraunces, Georgia, serif;
+      font-weight: 800;
+      font-size: clamp(32px, 5vw, 46px);
+      line-height: 1.05;
+      letter-spacing: -.02em;
+      margin: 0 0 16px;
+    }
+    .about p { margin: 0 0 14px; color: var(--muted); max-width: 52ch; }
+    .cards {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 12px;
+    }
+    @media (min-width: 560px) {
+      .cards { grid-template-columns: 1fr 1fr; }
+    }
+    .cards li {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 20px;
+    }
+    .cards .icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: var(--accent-soft);
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+    .cards .icon svg { width: 20px; height: 20px; }
+    .cards strong { display: block; font-size: 16px; margin-bottom: 2px; }
+    .cards span { color: var(--muted); font-size: 14px; line-height: 1.5; }
+
+    footer {
+      padding-top: 56px;
+      padding-bottom: 36px;
+      color: var(--muted);
+      font-size: 13px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px 24px;
+    }
+    footer a { color: inherit; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-photo, .pill .dot, .player-head h2::before { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <picture>
+      <!-- Tall screens (phones) get a portrait cut, so the photo stays sharp -->
+      <source media="(max-aspect-ratio: 4/5)" srcset="images/potala-portrait.jpg">
+      <img class="hero-photo"
+           src="images/potala-2000.jpg"
+           srcset="images/potala-1000.jpg 1000w, images/potala-2000.jpg 2000w"
+           sizes="(max-aspect-ratio: 3/2) 150vh, 100vw"
+           alt="The Potala Palace in Lhasa, reflected in the water below it">
+    </picture>
+    <div class="flags" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+
+    <nav class="wrap" aria-label="Site">
+      <a class="brand" href="./">
+        <svg viewBox="0 0 108 108" aria-hidden="true">
+          <circle cx="54" cy="54" r="54" fill="#e81e4d"/>
+          <circle cx="54" cy="54" r="7" fill="#fff"/>
+          <path d="M44.1 44.1a14 14 0 0 0 0 19.8M63.9 44.1a14 14 0 0 1 0 19.8M37 37a24 24 0 0 0 0 34M71 37a24 24 0 0 1 0 34" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+        </svg>
+        Radio Lhasa
+      </a>
+      <span class="pill"><span class="dot"></span>On air</span>
+    </nav>
+
+    <div class="hero-body wrap">
+      <div class="hero-text">
+        <p class="eyebrow">Live from the roof of the world</p>
+        <h1>Radio Lhasa</h1>
+        <div class="dj">
+          <span class="dj-avatar" aria-hidden="true">TA</span>
+          <span class="dj-text">
+            <span class="dj-label">Your DJ</span>
+            <span class="dj-name">Tenzin Ali</span>
+          </span>
+        </div>
+        <p class="lede">Tibetan songs and prayers, streaming live around the clock.</p>
+      </div>
+
+      <section class="player" aria-label="Live radio player">
+        <div class="player-head">
+          <h2>Listen live</h2>
+          <span>Press play</span>
+        </div>
+        <!-- caster.fm player (public token only; the broadcast password is never in this page) -->
+        <div data-type="newStreamPlayer" data-publicToken="559cee41-6071-4a67-bfca-e69331aba8f8" data-theme="dark" data-color="e81e4d" data-channelId="" data-rendered="false" class="cstrEmbed"><a href="https://www.caster.fm">Shoutcast Hosting</a> <a href="https://www.caster.fm">Stream Hosting</a> <a href="https://www.caster.fm">Radio Server Hosting</a></div>
+        <noscript><p class="player-fallback">The player needs JavaScript turned on.</p></noscript>
+      </section>
+    </div>
+  </header>
+
+  <main>
+    <section class="about wrap">
+      <div>
+        <h2>The sound of Lhasa, all day and all night</h2>
+        <p>DJ Tenzin Ali plays Tibetan music, mantras and songs, one after another. Press play and leave it on, at home, at work or on the road.</p>
+      </div>
+      <ul class="cards">
+        <li>
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+          <strong>Live, all day</strong>
+          <span>Everyone hears the same song at the same time.</span>
+        </li>
+        <li>
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+          <strong>Tibetan music</strong>
+          <span>Songs, mantras and prayers from Tibet.</span>
+        </li>
+        <li>
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
+          <strong>Any device</strong>
+          <span>Phone, tablet or computer, right in the browser.</span>
+        </li>
+        <li>
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
+          <strong>Free to listen</strong>
+          <span>No account and no app needed.</span>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <span>© <span id="year">2026</span> Radio Lhasa · DJ Tenzin Ali</span>
+    <span>Photo: <a href="https://commons.wikimedia.org/wiki/File:Potala_Palace_and_reflection_in_Lhasa,_Tibet.jpg">Potala Palace</a> by Jan Kranendonk, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>, resized</span>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+  <script src="https://cdn.cloud.caster.fm/widgets/embed.js"></script>
+</body>
+</html>
