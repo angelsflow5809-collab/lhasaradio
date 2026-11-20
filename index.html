@@ -264,7 +264,7 @@
       color: rgba(255, 255, 255, .86);
     }
 
-    /* ---------- Player, overlapping the photo ---------- */
+    /* ---------- Player, in the photo ---------- */
     /* Maroon-to-crimson glass, the colour of monks' robes */
     .player {
       position: relative;
@@ -277,18 +277,14 @@
       box-shadow: 0 30px 80px rgba(80, 6, 30, .55), inset 0 1px 0 rgba(255, 255, 255, .2);
       -webkit-backdrop-filter: blur(18px) saturate(140%);
       backdrop-filter: blur(18px) saturate(140%);
-      padding: 16px;
-    }
-    .player .cstrEmbed iframe {
-      border-radius: 14px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, .35);
+      padding: 20px;
     }
     .player-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      padding: 2px 4px 12px;
+      margin-bottom: 18px;
     }
     .player-head h2 {
       display: flex;
@@ -307,12 +303,137 @@
       background: #ff3b63;
       animation: ping 1.8s ease-out infinite;
     }
+    .player.off .player-head h2::before { background: rgba(255, 255, 255, .45); animation: none; }
     .player-head span {
       font-size: 13px;
       color: rgba(255, 255, 255, .7);
     }
-    .player .cstrEmbed { width: 100%; }
-    .player-fallback { color: rgba(255, 255, 255, .8); font-size: 15px; margin: 0; }
+
+    .np {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .cover {
+      position: relative;
+      flex: none;
+      width: 132px;
+      height: 132px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 14px 34px rgba(0, 0, 0, .45);
+      background: #2a0c1c;
+    }
+    .cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .6s ease;
+    }
+    .player.playing .cover img { transform: scale(1.04); }
+    .np-text { min-width: 0; flex: 1; }
+    .np-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .65);
+      margin-bottom: 6px;
+    }
+    .np-title {
+      margin: 0;
+      font-size: 19px;
+      font-weight: 700;
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      overflow-wrap: anywhere;
+    }
+    .np-artist {
+      margin: 4px 0 0;
+      font-size: 14px;
+      color: rgba(255, 255, 255, .72);
+    }
+    .eq {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 16px;
+      margin-top: 10px;
+    }
+    .eq i {
+      width: 4px;
+      height: 4px;
+      border-radius: 2px;
+      background: #ff7a96;
+    }
+    .player.playing .eq i { animation: eq .9s ease-in-out infinite alternate; }
+    .player.playing .eq i:nth-child(2) { animation-delay: -.3s; }
+    .player.playing .eq i:nth-child(3) { animation-delay: -.6s; }
+    .player.playing .eq i:nth-child(4) { animation-delay: -.15s; }
+    .player.playing .eq i:nth-child(5) { animation-delay: -.45s; }
+    @keyframes eq {
+      from { height: 4px; }
+      to { height: 16px; }
+    }
+
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 20px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255, 255, 255, .14);
+    }
+    .play {
+      flex: none;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 0;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      color: #7a1630;
+      background: #fff;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, .35);
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .play:hover { transform: scale(1.05); }
+    .play:active { transform: scale(.96); }
+    .play:focus-visible { outline: 3px solid #ff7a96; outline-offset: 3px; }
+    .play svg { width: 26px; height: 26px; }
+    .play .i-pause, .play .i-wait { display: none; }
+    .player.playing .play .i-play, .player.loading .play .i-play { display: none; }
+    .player.playing .play .i-pause { display: block; }
+    .player.loading .play .i-wait { display: block; animation: spin 1s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .play-text { min-width: 0; flex: 1; }
+    .play-text strong { display: block; font-size: 15px; }
+    .play-text span { display: block; font-size: 13px; color: rgba(255, 255, 255, .7); }
+    .volume {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255, 255, 255, .8);
+    }
+    .volume svg { width: 20px; height: 20px; flex: none; }
+    .volume input {
+      width: 96px;
+      accent-color: #ff4d72;
+    }
+    @media (max-width: 420px) {
+      .cover { width: 104px; height: 104px; }
+      .np-title { font-size: 17px; }
+      .volume input { width: 72px; }
+    }
+    @media (hover: none) and (pointer: coarse) {
+      .volume { display: none; } /* phones: use the phone's volume buttons */
+    }
 
     /* ---------- About ---------- */
     .about {
@@ -402,7 +523,7 @@
         </svg>
         Radio Lhasa
       </a>
-      <span class="pill"><span class="dot"></span>On air</span>
+      <span class="pill"><span class="dot"></span><span>On air</span></span>
     </nav>
 
     <div class="hero-body wrap">
@@ -419,14 +540,36 @@
         <p class="lede">Tibetan songs and prayers, streaming live around the clock.</p>
       </div>
 
-      <section class="player" aria-label="Live radio player">
+      <section class="player off" id="player" aria-label="Live radio player">
         <div class="player-head">
           <h2>Listen live</h2>
-          <span>Press play</span>
+          <span id="np-status">Checking the station…</span>
         </div>
-        <!-- caster.fm player (public token only; the broadcast password is never in this page) -->
-        <div data-type="newStreamPlayer" data-publicToken="559cee41-6071-4a67-bfca-e69331aba8f8" data-theme="dark" data-color="e81e4d" data-channelId="" data-rendered="false" class="cstrEmbed"><a href="https://www.caster.fm">Shoutcast Hosting</a> <a href="https://www.caster.fm">Stream Hosting</a> <a href="https://www.caster.fm">Radio Server Hosting</a></div>
-        <noscript><p class="player-fallback">The player needs JavaScript turned on.</p></noscript>
+        <div class="np">
+          <div class="cover"><img id="cover" src="images/covers/radio-lhasa-512.jpg" alt="Radio Lhasa cover" width="512" height="512"></div>
+          <div class="np-text">
+            <span class="np-label">Now playing</span>
+            <p class="np-title" id="np-title">Radio Lhasa</p>
+            <p class="np-artist">with DJ Tenzin Ali</p>
+            <div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+        </div>
+        <div class="controls">
+          <button class="play" id="play" type="button" aria-label="Play">
+            <svg class="i-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.4-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>
+            <svg class="i-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4.5" height="14" rx="1.2"/><rect x="13.5" y="5" width="4.5" height="14" rx="1.2"/></svg>
+            <svg class="i-wait" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9"/></svg>
+          </button>
+          <div class="play-text">
+            <strong id="play-label">Press play</strong>
+            <span id="play-sub">Live, the same song for everyone</span>
+          </div>
+          <label class="volume">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
+            <input type="range" id="volume" min="0" max="1" step="0.01" value="0.9" aria-label="Volume">
+          </label>
+        </div>
+        <audio id="audio" preload="none"></audio>
       </section>
     </div>
   </header>
@@ -464,12 +607,169 @@
 
   <footer class="wrap">
     <span>© <span id="year">2026</span> Radio Lhasa · DJ Tenzin Ali</span>
-    <span>Photo: <a href="https://commons.wikimedia.org/wiki/File:Potala_Palace_and_reflection_in_Lhasa,_Tibet.jpg">Potala Palace</a> by Jan Kranendonk, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>, resized</span>
+    <span>Photo: <a href="https://commons.wikimedia.org/wiki/File:Potala_Palace_and_reflection_in_Lhasa,_Tibet.jpg">Potala Palace</a> by Jan Kranendonk, <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>, resized · Streaming by <a href="https://www.caster.fm">caster.fm</a></span>
   </footer>
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Radio Lhasa player. The audio comes straight from caster.fm; /api/stream (on Vercel)
+    // only hands the browser the current stream address, because caster.fm's token changes.
+    (function () {
+      var STREAM = "/api/stream";
+      var STATUS = "https://morcast.caster.fm:14433/status-json.xsl";
+      var MOUNT = "/EJU95";
+      var STATION_COVER = "images/covers/radio-lhasa-512.jpg";
+      var STATION_COVER_BIG = "images/covers/radio-lhasa.jpg";
+      var ARTIST = "Radio Lhasa · DJ Tenzin Ali";
+
+      var player = document.getElementById("player");
+      var audio = document.getElementById("audio");
+      var button = document.getElementById("play");
+      var titleEl = document.getElementById("np-title");
+      var coverEl = document.getElementById("cover");
+      var statusEl = document.getElementById("np-status");
+      var label = document.getElementById("play-label");
+      var sub = document.getElementById("play-sub");
+      var volume = document.getElementById("volume");
+      var pill = document.querySelector(".pill");
+
+      var wantPlay = false;
+      var retries = 0;
+      var onAir = false;
+      var covers = {}; // optional per-song pictures: images/covers/covers.json
+
+      function abs(path) { return new URL(path, location.href).href; }
+      function clean(t) { return (t || "").replace(/\s+/g, " ").trim(); }
+
+      function coverFor(title) {
+        var key = clean(title).toLowerCase();
+        for (var name in covers) {
+          if (key && key.indexOf(name.toLowerCase()) !== -1) return covers[name];
+        }
+        return null;
+      }
+
+      function setState(state) {
+        player.classList.toggle("playing", state === "playing");
+        player.classList.toggle("loading", state === "loading");
+        button.setAttribute("aria-label", state === "playing" ? "Pause" : "Play");
+        if (state === "playing") {
+          label.textContent = "Playing live";
+          sub.textContent = "Tap to pause";
+        } else if (state === "loading") {
+          label.textContent = "Tuning in…";
+          sub.textContent = "Connecting to the station";
+        } else {
+          label.textContent = onAir ? "Press play" : "Off air right now";
+          sub.textContent = onAir ? "Live, the same song for everyone" : "We'll be back soon";
+        }
+        if ("mediaSession" in navigator) {
+          navigator.mediaSession.playbackState = state === "playing" ? "playing" : "paused";
+        }
+      }
+
+      function showSong(title) {
+        var song = clean(title) || "Radio Lhasa";
+        titleEl.textContent = song;
+        var art = coverFor(song);
+        var small = art || STATION_COVER;
+        if (coverEl.getAttribute("src") !== small) coverEl.src = small;
+        if ("mediaSession" in navigator && window.MediaMetadata) {
+          navigator.mediaSession.metadata = new MediaMetadata({
+            title: song,
+            artist: ARTIST,
+            album: "Radio Lhasa",
+            artwork: [
+              { src: abs(small), sizes: "512x512", type: "image/jpeg" },
+              { src: abs(art || STATION_COVER_BIG), sizes: "1000x1000", type: "image/jpeg" }
+            ]
+          });
+        }
+      }
+
+      function start() {
+        wantPlay = true;
+        setState("loading");
+        audio.src = STREAM + "?t=" + Date.now(); // always join the live point
+        audio.volume = Number(volume.value);
+        var p = audio.play();
+        if (p && p.catch) p.catch(function (e) {
+          if (e && e.name === "NotAllowedError") { wantPlay = false; setState("paused"); }
+        });
+      }
+
+      function stop() {
+        wantPlay = false;
+        retries = 0;
+        audio.pause();
+        audio.removeAttribute("src"); // stop downloading the live stream
+        audio.load();
+        setState("paused");
+      }
+
+      button.addEventListener("click", function () { wantPlay ? stop() : start(); });
+      audio.addEventListener("playing", function () { retries = 0; setState("playing"); });
+      audio.addEventListener("waiting", function () { if (wantPlay) setState("loading"); });
+      function recover() {
+        if (!wantPlay) return;
+        if (retries++ < 5) {
+          setState("loading");
+          setTimeout(function () { if (wantPlay) start(); }, 1500 * retries);
+        } else {
+          wantPlay = false;
+          setState("paused");
+          sub.textContent = "Couldn't connect. Try again in a moment.";
+        }
+      }
+      audio.addEventListener("error", recover);
+      audio.addEventListener("ended", recover); // the stream dropped
+
+      try {
+        var saved = localStorage.getItem("radioLhasaVolume");
+        if (saved !== null) volume.value = saved;
+      } catch (e) {}
+      volume.addEventListener("input", function () {
+        audio.volume = Number(volume.value);
+        try { localStorage.setItem("radioLhasaVolume", volume.value); } catch (e) {}
+      });
+
+      if ("mediaSession" in navigator) {
+        try {
+          navigator.mediaSession.setActionHandler("play", start);
+          navigator.mediaSession.setActionHandler("pause", stop);
+          navigator.mediaSession.setActionHandler("stop", stop);
+        } catch (e) {}
+      }
+
+      // What's on air: the song title, straight from the caster.fm server.
+      function poll() {
+        fetch(STATUS, { cache: "no-store" })
+          .then(function (r) { return r.json(); })
+          .then(function (d) {
+            var list = [].concat((d.icestats && d.icestats.source) || []);
+            var src = list.filter(function (s) { return s && /\/EJU95$/.test(s.listenurl || ""); })[0];
+            onAir = !!src;
+            player.classList.toggle("off", !onAir);
+            statusEl.textContent = onAir ? "On air" : "Off air";
+            if (pill) pill.lastChild.textContent = onAir ? "On air" : "Off air";
+            showSong(onAir ? src.title : "");
+            if (!wantPlay) setState("paused");
+          })
+          .catch(function () {
+            statusEl.textContent = "Live";
+          });
+      }
+
+      fetch("images/covers/covers.json", { cache: "no-cache" })
+        .then(function (r) { return r.ok ? r.json() : {}; })
+        .then(function (c) { covers = c || {}; })
+        .catch(function () {})
+        .then(poll);
+      setInterval(poll, 15000);
+      showSong("");
+      setState("paused");
+    })();
   </script>
-  <script src="https://cdn.cloud.caster.fm/widgets/embed.js"></script>
 </body>
 </html>
